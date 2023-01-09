@@ -20,9 +20,10 @@ Please explain the reason for your decision.
 After you take a choice, please complete the following tasks.
 
 1. Create the infrastructure and the pipeline needed in order to serve our application from ECS containers.
-2. Host our database in REDS and import the current data (/db/database.sql).
+2. Host our database in RDS and import the current data (/db/database.sql).
 3. Create a script that easy deploy new code to the stack.
 4. Set autoscaling policies in order to have a minimum of 1 task, a desired of 1, and a maximum of 10 based on the CPU usage.
+5. Add some simple observability solution where we can monitor the app: APM or logs or both if you have the time.
 
 ## Application details:
 
