@@ -27,7 +27,7 @@ After you take a choice, please complete the following tasks.
 
 ## Application details:
 
-* Ruby version: 2.3,x
+* Ruby version: 2.3.x
 * Rails version: 4.2
 * Postgres version :11.6
 
