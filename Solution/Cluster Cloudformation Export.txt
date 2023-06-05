@@ -1,0 +1,89 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "The template used to create an ECS Service from the ECS Console.",
+  "Parameters": {
+    "ECSClusterName": {
+      "Type": "String",
+      "Default": "DevCluster"
+    },
+    "SecurityGroupIDs": {
+      "Type": "CommaDelimitedList",
+      "Default": "sg-0faaaf1eeae0255f5"
+    },
+    "SubnetIDs": {
+      "Type": "CommaDelimitedList",
+      "Default": "subnet-074b5516c8c9646ad,subnet-0f63f3ff1352c3269,subnet-05f98162761773429"
+    },
+    "VpcID": {
+      "Type": "String",
+      "Default": "vpc-0bdd3e805f35ea0ed"
+    },
+    "LoadBalancerName": {
+      "Type": "String",
+      "Default": ""
+    }
+  },
+  "Resources": {
+    "ECSService": {
+      "Type": "AWS::ECS::Service",
+      "Properties": {
+        "Cluster": "DevCluster",
+        "TaskDefinition": "arn:aws:ecs:us-east-2:141943149524:task-definition/mejuri:3",
+        "ServiceName": "mejurich",
+        "SchedulingStrategy": "REPLICA",
+        "DesiredCount": 1,
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "SecurityGroups": {
+              "Ref": "SecurityGroupIDs"
+            },
+            "Subnets": {
+              "Ref": "SubnetIDs"
+            }
+          }
+        },
+        "DeploymentConfiguration": {
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 100,
+          "DeploymentCircuitBreaker": {
+            "Enable": true,
+            "Rollback": true
+          }
+        },
+        "DeploymentController": {
+          "Type": "ECS"
+        },
+        "ServiceConnectConfiguration": {
+          "Enabled": false
+        },
+        "PlacementStrategies": [
+          {
+            "Field": "attribute:ecs.availability-zone",
+            "Type": "spread"
+          },
+          {
+            "Field": "instanceId",
+            "Type": "spread"
+          }
+        ],
+        "PlacementConstraints": [],
+        "Tags": [],
+        "EnableECSManagedTags": true
+      }
+    }
+  },
+  "Outputs": {
+    "ClusterName": {
+      "Description": "The cluster used to create the service.",
+      "Value": {
+        "Ref": "ECSClusterName"
+      }
+    },
+    "ECSService": {
+      "Description": "The created service.",
+      "Value": {
+        "Ref": "ECSService"
+      }
+    }
+  }
+}
