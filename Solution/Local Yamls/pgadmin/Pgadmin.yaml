@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: pgadmin
+  name: pgadmin
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: pgadmin
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: pgadmin
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "3000"
+        - name: PGADMIN_DEFAULT_EMAIL
+          value: "rsaikosaraju@gmail.com"
+        - name: PGADMIN_DEFAULT_PASSWORD
+          value: "password"
+        
+        image: dpage/pgadmin4:latest
+        imagePullPolicy: IfNotPresent
+        name: pgadmin
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: mejurichallenge
+  name: mejurichallenge
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mejurichallenge
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mejurichallenge
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "3000"
+        envFrom:
+        - configMapRef:
+            name: mejurichallenge
+        image: mejurichallenge:002
+        imagePullPolicy: IfNotPresent
+        name: mejurichallenge
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP

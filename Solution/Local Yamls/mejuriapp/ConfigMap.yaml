@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mejurichallenge
+data:
+  PORT: "3000"
+  RACK_ENV: development
+  RAILS_ENV: development
+  RAILS_LOG_TO_STDOUT: "true"
+  RAILS_SERVE_STATIC_FILES: "true"
+  SECRET_KEY_BASE: "fcbadd4a31a42f9ad940b07e12f5655c1bf78f664c7fe62776ec06b60d3bde0cfe6e1ea8ea09f33827c4d10144110b69a805e294a6ddc90bb5a9f1068255a5d2"
+  DATABASE_NAME: "hello_world"
+  DATABASE_USER: "postgres"
+  DATABASE_PASSWORD: "postgres"
+  DATABASE_HOST: "postgres"
+  DATABASE_PORT: "5432"
